@@ -91,7 +91,8 @@
     </main>
 
     <script>
-        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzUW6pJnHkq6krcou-6CWr0vvdooTpUmcImenmXEVXvXbpbRnnaIWN1mNdbaUlkXSXX/exec";
+        // AAPKA NAYA SCRIPT URL LAG GYI HAI IDHAR
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDoaB4WmP22s6_oZ7iFzFhb5eyJU4o5-Mnht7ZugXPoifyFJyNnJJrjYKdhcKir9J_/exec";
 
         function verifyPromoCode() {
             const promo = document.getElementById('promoCode').value.trim().toLowerCase();
@@ -103,14 +104,12 @@
             if (promo === "kmentor60") {
                 feedback.style.color = "#10b981";
                 feedback.innerText = "🎉 Success: 60% Discount Applied Code Active!";
-                // Calculations ($5 ka 60% off = $2, Rs.1000 ka 60% off = Rs.400)
                 displayUsd.innerText = "$2.00";
                 displayPkr.innerText = "/ Rs. 400";
                 priceNotice.innerHTML = "<span class='text-emerald-400 font-bold'>PROMO_FLOW ACTIVE: 60% OFF verified.</span>";
             } else if (promo !== "") {
                 feedback.style.color = "#ef4444";
                 feedback.innerText = "Invalid Promo Code.";
-                // Reset to baseline if wrong code entered
                 displayUsd.innerText = "$5.00";
                 displayPkr.innerText = "/ Rs. 1000";
                 priceNotice.innerText = "Standard pipeline entry fee.";
