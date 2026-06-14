@@ -45,8 +45,8 @@
     </main>
 
     <script>
-        // UPDATED WITH YOUR NEW WEB APP URL
-        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyCuHP5nA3Jeq6c6Lw4P6PHseCEJmh1wPgZu9ls874tByThzXtoWog6FQr7d8BjE5JQ/exec";
+        // NEW URL PLUGGED IN SUCCESSFULLY
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtnTfto35vZJNBmFf6GVvhvMxDLQoJu4bf8LW4L4xvn_J-vemHV6J8sUsO9GFOkW6h/exec";
 
         async function checkDatabaseAccess() {
             const email = document.getElementById('accessEmail').value.trim();
@@ -56,7 +56,7 @@
             if(!email) { alert("Please enter email."); return; }
 
             logBox.style.color = "#fbbf24";
-            logBox.innerText = "Scanning database ledger matrix...";
+            logBox.innerText = "Checking index database entries...";
             btn.disabled = true;
 
             try {
@@ -73,18 +73,18 @@
                 const result = await response.json();
                 if(result.status === "access_granted") {
                     logBox.style.color = "#10b981";
-                    logBox.innerText = "Access Granted! Loading workspace terminal...";
+                    logBox.innerText = "Verification Clear! Loading premium core workspace...";
                     setTimeout(() => {
                         window.location.href = `premium.html?email=${encodeURIComponent(email)}&session=active_secure`;
                     }, 1000);
                 } else {
                     logBox.style.color = "#ef4444";
-                    logBox.innerText = result.message || "Access Denied: Record pending or invalid.";
+                    logBox.innerText = result.message || "Access Denied: Record pending verification setup.";
                     btn.disabled = false;
                 }
             } catch(e) {
                 logBox.style.color = "#ef4444";
-                logBox.innerText = "Network Error: Failed to handshake with database array.";
+                logBox.innerText = "Database array handshake fault. Re-verifying fields...";
                 btn.disabled = false;
             }
         }
