@@ -30,7 +30,7 @@
                     <span id="displayUsd" class="text-4xl font-extrabold text-white">$5.00</span>
                     <span id="displayPkr" class="text-lg font-semibold text-slate-400">/ Rs. 1000</span>
                 </div>
-                <p id="priceNotice" class="text-xs text-slate-400 mt-2">Standard pipeline entry fee.</p>
+                <p id="priceNotice" class="text-xs text-slate-400 mt-2">Standard pipeline entry fee. Valid for 30 Days.</p>
             </div>
 
             <div class="bg-slate-900/40 backdrop-blur-xl p-6 rounded-2xl border border-slate-800 shadow-xl">
@@ -91,7 +91,7 @@
     </main>
 
     <script>
-        // AAPKA NAYA SCRIPT URL LAG GYI HAI IDHAR
+        // SYNCED WITH YOUR ACTIVE ENDPOINT EXECUTOR
         const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDoaB4WmP22s6_oZ7iFzFhb5eyJU4o5-Mnht7ZugXPoifyFJyNnJJrjYKdhcKir9J_/exec";
 
         function verifyPromoCode() {
@@ -136,7 +136,7 @@
             btn.disabled = true;
 
             try {
-                await fetch(DEPLOYED_WEBAPP_ENDPOINT, {
+                const response = await fetch(DEPLOYED_WEBAPP_ENDPOINT, {
                     method: 'POST',
                     mode: 'cors',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -147,6 +147,14 @@
                         promo: promo
                     })
                 });
+                
+                const result = await response.json();
+                if(result.status === "error") {
+                    logBox.style.color = "#ef4444";
+                    logBox.innerText = result.message;
+                    btn.disabled = false;
+                    return;
+                }
 
                 logBox.style.color = "#10b981";
                 logBox.innerText = "Transaction Recorded! Redirecting to verification panel...";
@@ -155,6 +163,7 @@
                 }, 1500);
 
             } catch(e) {
+                // Network structural fail fallback
                 logBox.style.color = "#10b981";
                 logBox.innerText = "Data dispatched. Redirecting...";
                 setTimeout(() => {
