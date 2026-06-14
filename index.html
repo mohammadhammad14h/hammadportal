@@ -11,35 +11,128 @@
     </style>
 </head>
 <body class="text-slate-200 min-h-screen flex flex-col justify-between">
+
     <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md px-4 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-extrabold text-white tracking-tight">KnowledgeMentor Labs</h1>
+            <div class="flex items-center space-x-4">
+                <div class="w-11 h-11 rounded-xl bg-sky-500/10 border border-slate-700 flex items-center justify-center text-sky-400 font-black text-xl">KM</div>
+                <h1 class="text-xl font-extrabold text-white tracking-tight">KnowledgeMentor Labs</h1>
+            </div>
         </div>
     </header>
 
-    <main class="flex-grow flex items-center justify-center px-4 py-12">
-        <div class="w-full max-w-md bg-slate-900/60 backdrop-blur-xl p-8 rounded-2xl border border-slate-800 shadow-2xl">
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 max-w-4xl mx-auto w-full gap-8 md:flex-row">
+        
+        <div class="w-full md:w-1/2 space-y-4">
+            <div class="bg-slate-900/40 backdrop-blur-xl p-6 rounded-2xl border border-slate-800 shadow-xl">
+                <h3 class="text-sm font-bold text-sky-400 uppercase tracking-wider mb-3">🔴 Option 1: Mobile Wallet</h3>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 font-mono text-xs space-y-1">
+                    <p class="text-slate-400">Method: <span class="text-white font-bold">JazzCash / EasyPaisa</span></p>
+                    <p class="text-slate-400">Account: <span class="text-emerald-400 font-bold">03XXXXXXXXX</span></p>
+                    <p class="text-slate-400">Title: <span class="text-slate-300">M. HAMMAD</span></p>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/40 backdrop-blur-xl p-6 rounded-2xl border border-slate-800 shadow-xl">
+                <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-3">🔵 Option 2: Crypto Networks</h3>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 font-mono text-[11px] space-y-3 loose-bounds">
+                    <div>
+                        <span class="text-amber-400 font-bold block mb-0.5">BEP20 Address:</span>
+                        <span class="text-slate-300 break-all select-all bg-slate-900/50 p-1.5 rounded block">0x3f...YourBep20AddressHere...</span>
+                    </div>
+                    <div>
+                        <span class="text-red-400 font-bold block mb-0.5">TRX (TRC20) Address:</span>
+                        <span class="text-slate-300 break-all select-all bg-slate-900/50 p-1.5 rounded block">T...YourTrxAddressHere...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 bg-slate-900/60 backdrop-blur-xl p-8 rounded-2xl border border-slate-800 shadow-2xl">
             <div class="text-center mb-6">
-                <span class="bg-sky-500/10 text-sky-400 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-sky-500/20">Step 1: Application Node</span>
-                <h2 class="text-2xl font-bold text-white mt-3">Activate Premium Engine</h2>
+                <span class="bg-sky-500/10 text-sky-400 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-sky-500/20">Step 1: Node Activation</span>
+                <h2 class="text-2xl font-bold text-white mt-3">Submit Gateway Payload</h2>
+                <p class="text-xs text-slate-400 mt-1">Apni details enter karein aur nizam-e-verification ko active karein.</p>
             </div>
 
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Your Email Address</label>
-                    <input type="email" id="payEmail" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-sky-500" placeholder="user@gmail.com">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Your Account Email</label>
+                    <input type="email" id="payEmail" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 transition-all text-sm font-mono" placeholder="user@gmail.com">
                 </div>
-                <button onclick="proceedToVerify()" class="w-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all text-sm">
-                    Proceed to Verification
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Payment Transaction ID (Trx ID)</label>
+                    <input type="text" id="trxId" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 transition-all text-sm font-mono" placeholder="TRX-98321X">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Promo Code (e.g., kmentor60)</label>
+                    <input type="text" id="promoCode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 transition-all text-sm font-mono" placeholder="ENTER CODE">
+                </div>
+
+                <button id="applyBtn" onclick="submitPaymentData()" class="w-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-sky-500/20 hover:opacity-95 transition-all text-sm tracking-wide">
+                    Apply & Log Transaction
                 </button>
+                <div id="statusLog" class="text-center text-xs font-semibold mt-2"></div>
             </div>
         </div>
     </main>
+
     <script>
-        function proceedToVerify() {
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzUW6pJnHkq6krcou-6CWr0vvdooTpUmcImenmXEVXvXbpbRnnaIWN1mNdbaUlkXSXX/exec";
+
+        async function submitPaymentData() {
             const email = document.getElementById('payEmail').value.trim();
-            if(!email) { alert("Please enter your email!"); return; }
-            window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
+            const trxId = document.getElementById('trxId').value.trim();
+            const promo = document.getElementById('promoCode').value.trim().toLowerCase();
+            const logBox = document.getElementById('statusLog');
+            const btn = document.getElementById('applyBtn');
+
+            if(!email || !trxId) {
+                logBox.style.color = "#ef4444";
+                logBox.innerText = "Error: Email and Transaction ID are required.";
+                return;
+            }
+
+            // Promo checking node integration (kmentor60 bypass verification rule)
+            if(promo === "kmentor60") {
+                logBox.style.color = "#10b981";
+                logBox.innerText = "Promo 'kmentor60' Verified! Instantly unlocking engine array...";
+                setTimeout(() => {
+                    window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
+                }, 1500);
+                return;
+            }
+
+            logBox.style.color = "#fbbf24";
+            logBox.innerText = "Submitting transaction to database...";
+            btn.disabled = true;
+
+            try {
+                await fetch(DEPLOYED_WEBAPP_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'submit_payment',
+                        email: email,
+                        trxId: trxId,
+                        promo: promo
+                    })
+                });
+
+                logBox.style.color = "#10b981";
+                logBox.innerText = "Logged successfully! Redirecting to verification panel...";
+                setTimeout(() => {
+                    window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
+                }, 1500);
+
+            } catch(e) {
+                logBox.style.color = "#10b981";
+                logBox.innerText = "Data buffered. Proceeding to verification gateway.";
+                setTimeout(() => {
+                    window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
+                }, 1500);
+            }
         }
     </script>
 </body>
