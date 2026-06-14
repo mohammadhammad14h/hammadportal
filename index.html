@@ -91,8 +91,8 @@
     </main>
 
     <script>
-        // UPDATED WITH YOUR NEW WEB APP URL
-        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyCuHP5nA3Jeq6c6Lw4P6PHseCEJmh1wPgZu9ls874tByThzXtoWog6FQr7d8BjE5JQ/exec";
+        // NEW URL PLUGGED IN SUCCESSFULLY
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtnTfto35vZJNBmFf6GVvhvMxDLQoJu4bf8LW4L4xvn_J-vemHV6J8sUsO9GFOkW6h/exec";
 
         function verifyPromoCode() {
             const promo = document.getElementById('promoCode').value.trim().toLowerCase();
@@ -132,7 +132,7 @@
             }
 
             logBox.style.color = "#fbbf24";
-            logBox.innerText = "Logging data to sheet database array...";
+            logBox.innerText = "Saving data into Leads tab automatically...";
             btn.disabled = true;
 
             try {
@@ -157,14 +157,14 @@
                 }
 
                 logBox.style.color = "#10b981";
-                logBox.innerText = "Transaction Recorded! Redirecting to verification panel...";
+                logBox.innerText = "Automation Sync Success! Opening verification gate...";
                 setTimeout(() => {
                     window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
-                }, 1500);
+                }, 1200);
 
             } catch(e) {
-                logBox.style.color = "#10b981";
-                logBox.innerText = "Data dispatched. Redirecting...";
+                logBox.style.color = "#ef4444";
+                logBox.innerText = "Handshake Error. Retrying local validation backup redirection...";
                 setTimeout(() => {
                     window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
                 }, 1500);
