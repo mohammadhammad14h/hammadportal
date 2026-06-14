@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Security Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at top right, #0f172a, #020617); }
+    </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col justify-between">
+
+    <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-lg font-bold text-white">KnowledgeMentor</h1>
+                <p class="text-[10px] text-sky-400 font-bold tracking-widest">100x PREMIUM AI SUITE</p>
+            </div>
+            <button class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs px-4 py-1.5 rounded-full font-semibold">Join Official WhatsApp Network</button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4">
+        <div class="w-full max-w-lg bg-slate-900/40 backdrop-blur-xl p-8 rounded-2xl border border-sky-500/30 shadow-2xl text-center relative">
+            <div class="mb-4 flex justify-center">
+                <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
+                    🔒
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Enterprise Security Verification</h2>
+            <p class="text-sm text-slate-400 mt-2">Enter your active license email account to unlock premium node resources.</p>
+
+            <div class="mt-6 text-left space-y-4">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-1">License Authentication Node</label>
+                    <input type="email" id="accessEmail" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm font-mono focus:outline-none focus:border-sky-500" placeholder="email@gmail.com">
+                </div>
+
+                <button id="verifyBtn" onclick="checkDatabaseAccess()" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-3.5 rounded-xl tracking-wide text-sm shadow-lg shadow-indigo-500/20">
+                    Verify Architecture Credentials
+                </button>
+                <div id="authLog" class="text-center text-xs font-semibold mt-3 text-red-500"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // AAPKI NEW APPS SCRIPT URL YAHA INTEGRATE HO GAYI HAI
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzUW6pJnHkq6krcou-6CWr0vvdooTpUmcImenmXEVXvXbpbRnnaIWN1mNdbaUlkXSXX/exec";
+
+        async function checkDatabaseAccess() {
+            const email = document.getElementById('accessEmail').value.trim();
+            const logBox = document.getElementById('authLog');
+            const btn = document.getElementById('verifyBtn');
+
+            if(!email) { alert("Please enter email."); return; }
+
+            logBox.style.color = "#fbbf24";
+            logBox.innerText = "Scanning 'Leads' ledger database...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(DEPLOYED_WEBAPP_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'check_access',
+                        email: email
+                    })
+                });
+
+                const result = await response.json();
+                if(result.status === "access_granted") {
+                    logBox.style.color = "#10b981";
+                    logBox.innerText = "Access Granted! Loading workspace...";
+                    setTimeout(() => {
+                        window.location.href = `premium.html?email=${encodeURIComponent(email)}&session=active_secure`;
+                    }, 1000);
+                } else {
+                    logBox.style.color = "#ef4444";
+                    logBox.innerText = result.message || "Network Error: Failed to handshake with database array.";
+                    btn.disabled = false;
+                }
+            } catch(e) {
+                logBox.style.color = "#ef4444";
+                logBox.innerText = "Network Error: Failed to handshake with database array.";
+                btn.disabled = false;
+            }
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('email')) {
+            document.getElementById('accessEmail').value = urlParams.get('email');
+        }
+    </script>
+</body>
+</html>
