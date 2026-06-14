@@ -12,14 +12,14 @@
 </head>
 <body class="text-slate-200 min-h-screen flex flex-col justify-between">
 
-    <!-- FIXED HEADER WITH MOHAMMAD HAMMAD AND PICTURE SETUP -->
+    <!-- FIXED HEADER WITH LIVE GITHUB IMAGE AND NAME -->
     <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md px-4 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <!-- Profile picture local source path -->
-                <img src="hammad.png" alt="Mohammad Hammad" class="w-11 h-11 rounded-xl border border-slate-700 object-cover bg-slate-800" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
+                <!-- Image path linked directly to your repository image file -->
+                <img src="image_6831ff.jpg.jpeg" alt="Mohammad Hammad" class="w-11 h-11 rounded-xl border border-slate-700 object-cover bg-slate-800" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
                 
-                <!-- Fallback standard logo if hammad.png is missing -->
+                <!-- Fallback if the image ever fails to load -->
                 <div id="fallback-logo" class="hidden w-11 h-11 rounded-xl bg-sky-500/10 border border-slate-700 flex items-center justify-center text-sky-400 font-black text-xl">MH</div>
                 
                 <div>
@@ -100,7 +100,7 @@
     </main>
 
     <script>
-        // FIXED NEW WEB APP ENDPOINT URL
+        // Updated Web App Endpoint Url
         const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtnTfto35vZJNBmFf6GVvhvMxDLQoJu4bf8LW4L4xvn_J-vemHV6J8sUsO9GFOkW6h/exec";
 
         function verifyPromoCode() {
