@@ -12,21 +12,24 @@
 </head>
 <body class="text-slate-200 min-h-screen flex flex-col justify-between">
 
-    <!-- FIXED HEADER WITH LIVE GITHUB IMAGE AND NAME -->
     <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md px-4 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
+            
             <div class="flex items-center space-x-4">
-                <!-- Image path linked directly to your repository image file -->
-                <img src="image_6831ff.jpg.jpeg" alt="Mohammad Hammad" class="w-11 h-11 rounded-xl border border-slate-700 object-cover bg-slate-800" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
+                <img src="image_6834c2.jpg.jpeg" alt="KnowledgeMentor Logo" class="w-11 h-11 rounded-xl border border-slate-700 object-cover bg-slate-800" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
                 
-                <!-- Fallback if the image ever fails to load -->
-                <div id="fallback-logo" class="hidden w-11 h-11 rounded-xl bg-sky-500/10 border border-slate-700 flex items-center justify-center text-sky-400 font-black text-xl">MH</div>
+                <div id="fallback-logo" class="hidden w-11 h-11 rounded-xl bg-sky-500/10 border border-slate-700 flex items-center justify-center text-sky-400 font-black text-xl">KM</div>
                 
                 <div>
                     <h1 class="text-xl font-extrabold text-white tracking-tight">Mohammad Hammad</h1>
                     <p class="text-[11px] text-slate-400 font-semibold tracking-wide">Founder, KnowledgeMentor Network</p>
                 </div>
             </div>
+
+            <div class="flex items-center">
+                <img src="image_6831ff.jpg.jpeg" alt="Mohammad Hammad Profile" class="w-11 h-11 rounded-full border-2 border-indigo-500 object-cover bg-slate-800 shadow-lg shadow-indigo-500/20">
+            </div>
+
         </div>
     </header>
 
@@ -100,7 +103,7 @@
     </main>
 
     <script>
-        // Updated Web App Endpoint Url
+        // Web App Endpoint URL
         const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtnTfto35vZJNBmFf6GVvhvMxDLQoJu4bf8LW4L4xvn_J-vemHV6J8sUsO9GFOkW6h/exec";
 
         function verifyPromoCode() {
