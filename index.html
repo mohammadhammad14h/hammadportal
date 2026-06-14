@@ -24,6 +24,15 @@
     <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 max-w-4xl mx-auto w-full gap-8 md:flex-row">
         
         <div class="w-full md:w-1/2 space-y-4">
+            <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 p-6 rounded-2xl border border-indigo-500/30 shadow-xl">
+                <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">💰 Premium Subscription Plan</h3>
+                <div class="flex items-baseline space-x-2">
+                    <span id="displayUsd" class="text-4xl font-extrabold text-white">$5.00</span>
+                    <span id="displayPkr" class="text-lg font-semibold text-slate-400">/ Rs. 1000</span>
+                </div>
+                <p id="priceNotice" class="text-xs text-slate-400 mt-2">Standard pipeline entry fee.</p>
+            </div>
+
             <div class="bg-slate-900/40 backdrop-blur-xl p-6 rounded-2xl border border-slate-800 shadow-xl">
                 <h3 class="text-sm font-bold text-sky-400 uppercase tracking-wider mb-3">🔴 Option 1: Mobile Wallet</h3>
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 font-mono text-xs space-y-1">
@@ -67,8 +76,8 @@
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Promo Code</label>
                     <div class="flex gap-2">
-                        <input type="text" id="promoCode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 transition-all text-sm font-mono" placeholder="kmentor60">
-                        <button type="button" onclick="verifyPromoCode()" class="bg-slate-800 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-700">Apply</button>
+                        <input type="text" id="promoCode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 transition-all text-sm font-mono" placeholder="Enter code manually">
+                        <button type="button" onclick="verifyPromoCode()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl text-xs font-bold transition-all">Apply</button>
                     </div>
                     <div id="promoFeedback" class="text-[11px] font-semibold mt-1"></div>
                 </div>
@@ -85,14 +94,26 @@
         const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzUW6pJnHkq6krcou-6CWr0vvdooTpUmcImenmXEVXvXbpbRnnaIWN1mNdbaUlkXSXX/exec";
 
         function verifyPromoCode() {
-            const promo = document.getElementById('promoCode').value.trim();
+            const promo = document.getElementById('promoCode').value.trim().toLowerCase();
             const feedback = document.getElementById('promoFeedback');
+            const displayUsd = document.getElementById('displayUsd');
+            const displayPkr = document.getElementById('displayPkr');
+            const priceNotice = document.getElementById('priceNotice');
+
             if (promo === "kmentor60") {
                 feedback.style.color = "#10b981";
-                feedback.innerText = "🎉 Code Active: 60% Discount Applied Successfuly!";
+                feedback.innerText = "🎉 Success: 60% Discount Applied Code Active!";
+                // Calculations ($5 ka 60% off = $2, Rs.1000 ka 60% off = Rs.400)
+                displayUsd.innerText = "$2.00";
+                displayPkr.innerText = "/ Rs. 400";
+                priceNotice.innerHTML = "<span class='text-emerald-400 font-bold'>PROMO_FLOW ACTIVE: 60% OFF verified.</span>";
             } else if (promo !== "") {
                 feedback.style.color = "#ef4444";
                 feedback.innerText = "Invalid Promo Code.";
+                // Reset to baseline if wrong code entered
+                displayUsd.innerText = "$5.00";
+                displayPkr.innerText = "/ Rs. 1000";
+                priceNotice.innerText = "Standard pipeline entry fee.";
             } else {
                 feedback.innerText = "";
             }
@@ -135,9 +156,8 @@
                 }, 1500);
 
             } catch(e) {
-                // Network fail safety fallback
                 logBox.style.color = "#10b981";
-                logBox.innerText = "Data dispatched. Proceeding to verification panel...";
+                logBox.innerText = "Data dispatched. Redirecting...";
                 setTimeout(() => {
                     window.location.href = `verifyemail.html?email=${encodeURIComponent(email)}`;
                 }, 1500);
