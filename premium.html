@@ -53,9 +53,8 @@
                 Execute System-Locked Framework Pipeline
             </button>
 
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 min-h-[100px] text-sm text-slate-300 font-mono whitespace-pre-wrap" id="engineTerminalOutput">
-                System is live and fully synchronized with 'Leads' Sheet structure. Ready for raw string deployment.
-            </div>
+            <!-- APKA CHANGED TEXT LINE IDHER APPLIED HAI -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 min-h-[100px] text-sm text-slate-400 font-mono whitespace-pre-wrap" id="engineTerminalOutput">Ready... Input data paste karein aur upar button par click karke pipeline execute karein.</div>
         </div>
     </main>
 
@@ -83,10 +82,9 @@
             if(!rawText) { alert("Matrix Error: Input payload data required."); return; }
             
             terminal.style.color = "#fbbf24";
-            terminal.innerText = `Compiling pipeline array for ${selectedFramework}...\nSending parameters to Gemini Pro Engine Engine Layer... Please wait.`;
+            terminal.innerText = `Compiling pipeline array for ${selectedFramework}...\nSending parameters to Gemini Pro Engine Layer... Please wait.`;
             btn.disabled = true;
 
-            // Combining parameters directly so backend processes correctly
             const combinedPromptText = `Selected Agent Framework: ${selectedFramework}\nTarget Output Language Style: ${selectedLang}\n\nUser Data Input:\n${rawText}`;
 
             try {
@@ -104,7 +102,7 @@
                 btn.disabled = false;
                 
                 if(result.status === "success") {
-                    terminal.style.color = "#f8fafc"; // Resetting color back to bright text
+                    terminal.style.color = "#f8fafc"; 
                     terminal.innerText = result.output;
                 } else {
                     terminal.style.color = "#ef4444";
