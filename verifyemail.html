@@ -25,9 +25,7 @@
     <main class="flex-grow flex items-center justify-center px-4">
         <div class="w-full max-w-lg bg-slate-900/40 backdrop-blur-xl p-8 rounded-2xl border border-sky-500/30 shadow-2xl text-center relative">
             <div class="mb-4 flex justify-center">
-                <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-                    🔒
-                </div>
+                <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">🔒</div>
             </div>
             <h2 class="text-2xl font-bold text-white">Enterprise Security Verification</h2>
             <p class="text-sm text-slate-400 mt-2">Enter your active license email account to unlock premium node resources.</p>
@@ -47,7 +45,6 @@
     </main>
 
     <script>
-        // AAPKI NEW APPS SCRIPT URL YAHA INTEGRATE HO GAYI HAI
         const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzUW6pJnHkq6krcou-6CWr0vvdooTpUmcImenmXEVXvXbpbRnnaIWN1mNdbaUlkXSXX/exec";
 
         async function checkDatabaseAccess() {
@@ -58,7 +55,7 @@
             if(!email) { alert("Please enter email."); return; }
 
             logBox.style.color = "#fbbf24";
-            logBox.innerText = "Scanning 'Leads' ledger database...";
+            logBox.innerText = "Scanning database ledger matrix...";
             btn.disabled = true;
 
             try {
@@ -75,7 +72,7 @@
                 const result = await response.json();
                 if(result.status === "access_granted") {
                     logBox.style.color = "#10b981";
-                    logBox.innerText = "Access Granted! Loading workspace...";
+                    logBox.innerText = "Access Granted! Loading workspace terminal...";
                     setTimeout(() => {
                         window.location.href = `premium.html?email=${encodeURIComponent(email)}&session=active_secure`;
                     }, 1000);
