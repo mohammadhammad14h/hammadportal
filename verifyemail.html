@@ -39,13 +39,14 @@
                 <button id="verifyBtn" onclick="checkDatabaseAccess()" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-3.5 rounded-xl tracking-wide text-sm shadow-lg shadow-indigo-500/20">
                     Verify Architecture Credentials
                 </button>
-                <div id="authLog" class="text-center text-xs font-semibold mt-3 text-red-500"></div>
+                <div id="authLog" class="text-center text-xs font-semibold mt-3"></div>
             </div>
         </div>
     </main>
 
     <script>
-        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzUW6pJnHkq6krcou-6CWr0vvdooTpUmcImenmXEVXvXbpbRnnaIWN1mNdbaUlkXSXX/exec";
+        // AAPKA NAYA SCRIPT URL IDHAR BHI UPDATE KR DIYA
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDoaB4WmP22s6_oZ7iFzFhb5eyJU4o5-Mnht7ZugXPoifyFJyNnJJrjYKdhcKir9J_/exec";
 
         async function checkDatabaseAccess() {
             const email = document.getElementById('accessEmail').value.trim();
@@ -78,7 +79,7 @@
                     }, 1000);
                 } else {
                     logBox.style.color = "#ef4444";
-                    logBox.innerText = result.message || "Network Error: Failed to handshake with database array.";
+                    logBox.innerText = result.message || "Access Denied: Record pending or invalid.";
                     btn.disabled = false;
                 }
             } catch(e) {
