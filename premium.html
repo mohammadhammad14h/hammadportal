@@ -23,23 +23,23 @@
     <main class="flex-grow flex items-center justify-center p-6">
         <div class="w-full max-w-4xl bg-slate-900/40 backdrop-blur-xl p-8 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
             <h2 class="text-xl font-bold text-white">Welcome to 3 Premium Prompt Engines</h2>
-            <p class="text-sm text-slate-400">Aapka structural layout successfully authentication handshake clear kar chuka hai.</p>
+            <p class="text-sm text-slate-400">Aapka structural layout successfully authentication handshake clear kar chuka hai (30 Days License Active).</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Select High-Performance Framework Node</label>
                     <select id="agentPromptSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 text-sm font-medium">
-                        <option value="aegis_auditor">🛡️ Framework 1: AEGIS v2.0 Legal T&C Forensics Auditor</option>
-                        <option value="financial_controller">📒 Framework 2: The Financial Controller & Ledger Architect (GAAP/IFRS)</option>
-                        <option value="humanized_writer">✍️ Framework 3: Master Humanized Writer Engine (Anti-Detection)</option>
+                        <option value="AEGIS v2.0 Legal T&C Forensics Auditor Framework">🛡️ Framework 1: AEGIS v2.0 Legal T&C Forensics Auditor</option>
+                        <option value="The Financial Controller & Ledger Architect Framework (GAAP/IFRS)">📒 Framework 2: The Financial Controller & Ledger Architect (GAAP/IFRS)</option>
+                        <option value="Master Humanized Writer Engine Framework (Anti-Detection)">✍️ Framework 3: Master Humanized Writer Engine (Anti-Detection)</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Downstream Compilation Language</label>
                     <select id="languageSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 text-sm font-medium">
-                        <option value="English">Pure English Output Structure (Standard)</option>
-                        <option value="Urdu">Urdu Unicode Text Script (اردو)</option>
-                        <option value="Roman Urdu">Roman Urdu Structural (Conversational)</option>
+                        <option value="Pure English Output Structure (Standard)">Pure English Output Structure (Standard)</option>
+                        <option value="Urdu Unicode Text Script (اردو)">Urdu Unicode Text Script (اردو)</option>
+                        <option value="Roman Urdu Structural (Conversational)">Roman Urdu Structural (Conversational)</option>
                     </select>
                 </div>
             </div>
@@ -49,17 +49,19 @@
                 <textarea id="rawPayloadInput" rows="6" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 text-sm font-mono" placeholder="Paste data sheets here..."></textarea>
             </div>
 
-            <button onclick="executeLocalEnginePipeline()" class="w-full bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 text-white font-bold py-4 rounded-xl shadow-xl hover:opacity-95 transition-all text-sm tracking-wide">
+            <button id="runBtn" onclick="executeLocalEnginePipeline()" class="w-full bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 text-white font-bold py-4 rounded-xl shadow-xl hover:opacity-95 transition-all text-sm tracking-wide">
                 Execute System-Locked Framework Pipeline
             </button>
 
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 min-h-[100px] text-sm text-slate-300" id="engineTerminalOutput">
-                System is live and fully synchronized with 'Leads' Sheet structure.
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 min-h-[100px] text-sm text-slate-300 font-mono whitespace-pre-wrap" id="engineTerminalOutput">
+                System is live and fully synchronized with 'Leads' Sheet structure. Ready for raw string deployment.
             </div>
         </div>
     </main>
 
     <script>
+        const DEPLOYED_WEBAPP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDoaB4WmP22s6_oZ7iFzFhb5eyJU4o5-Mnht7ZugXPoifyFJyNnJJrjYKdhcKir9J_/exec";
+
         const urlParams = new URLSearchParams(window.location.search);
         const currentSessionEmail = urlParams.get('email');
         const sessionToken = urlParams.get('session');
@@ -71,13 +73,49 @@
             document.getElementById('sessionUser').innerText = "Operator: " + currentSessionEmail;
         }
 
-        function executeLocalEnginePipeline() {
+        async function executeLocalEnginePipeline() {
             const rawText = document.getElementById('rawPayloadInput').value.trim();
             const terminal = document.getElementById('engineTerminalOutput');
             const selectedFramework = document.getElementById('agentPromptSelect').value;
+            const selectedLang = document.getElementById('languageSelect').value;
+            const btn = document.getElementById('runBtn');
 
             if(!rawText) { alert("Matrix Error: Input payload data required."); return; }
-            terminal.innerText = `Compiling pipeline array for ${selectedFramework}... Data processed successfully.`;
+            
+            terminal.style.color = "#fbbf24";
+            terminal.innerText = `Compiling pipeline array for ${selectedFramework}...\nSending parameters to Gemini Pro Engine Engine Layer... Please wait.`;
+            btn.disabled = true;
+
+            // Combining parameters directly so backend processes correctly
+            const combinedPromptText = `Selected Agent Framework: ${selectedFramework}\nTarget Output Language Style: ${selectedLang}\n\nUser Data Input:\n${rawText}`;
+
+            try {
+                const response = await fetch(DEPLOYED_WEBAPP_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'execute_prompt',
+                        prompt: combinedPromptText
+                    })
+                });
+
+                const result = await response.json();
+                btn.disabled = false;
+                
+                if(result.status === "success") {
+                    terminal.style.color = "#f8fafc"; // Resetting color back to bright text
+                    terminal.innerText = result.output;
+                } else {
+                    terminal.style.color = "#ef4444";
+                    terminal.innerText = "Error Node Interrupted: " + (result.message || "Server rejected payload compilation request.");
+                }
+
+            } catch(e) {
+                terminal.style.color = "#ef4444";
+                terminal.innerText = "Handshake Failed: Network failed to communicate with execution core pipeline.";
+                btn.disabled = false;
+            }
         }
     </script>
 </body>
